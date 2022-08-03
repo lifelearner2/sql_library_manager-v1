@@ -30,6 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', indexRouter);
 
 
+//error handling
 app.use((req, res, next) => {
   const err = new Error('Page Not Found');
   err.status = 404;
