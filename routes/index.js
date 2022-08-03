@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Book = require('../models').Book;
 
+//Using async handler to reduce error handling code
 function asyncHandler(cb){
     return async(req, res, next) => {
       try {
@@ -19,16 +20,17 @@ router.get('/', (req, res) => {
     console.log('Handling request to home page, "/"');
   });
   
-//Shows full list of books
+//Shows full list of books | Using Async/Await (should it be res.render?)
 router.get('/books', asyncHandler(async (req, res) => {
     const books = await Book.findAll();
+    //throw new Error("It Broke")
     res.json(books);
   }));
 
   //Shows the create new book form 
   router.get('/books/new', asyncHandler(async (req, res) => {
-    const newBooks = await newBook.get();
-    res.json(books);
+    const newBooks = await NewBook.get();
+    res.json(newBooks);
   }));
 
   //Posts a new book to database
