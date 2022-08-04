@@ -1,7 +1,9 @@
 const express = require('express');
 const book = require('../models/book');
+const createNewBook = require('./books.js');
 const router = express.Router();
 const Book = require('../models').Book;
+
 
 //Using async handler to reduce error handling code
 function asyncHandler(cb){
@@ -18,10 +20,18 @@ function asyncHandler(cb){
 /* GET home page & redirecting to Book page. */
 router.get('/', (req, res) => {
     res.redirect("/books");
+// New entry | Posts a new book to database
+createNewBook(
+  "Dune", "Frank Herbert", "Fiction", "2007"
+);
+ 
     console.log('Handling request to home page, "/"');
   });
   
-//Shows full list of books | Using Async/Await (should it be res.render?)
+
+
+
+//Shows full list of books 
 router.get('/books', asyncHandler(async (req, res) => {
     const books = await Book.findAll();
     //throw new Error("It Broke")
@@ -30,8 +40,11 @@ router.get('/books', asyncHandler(async (req, res) => {
 
   //Shows the create new book form - browser says "NewBook at /books/new is not defined"
   router.get('/books/new', asyncHandler(async (req, res) => {
-    const newBooks = await NewBook.get();
-    res.json(newBooks);
+    const newBooks = createNewBook(
+      "Test", "Test Author", "Fiction", "2008"
+    );
+    //res.json(newBooks);
+    res.redirect("/books");
   }));
 
  
@@ -40,12 +53,15 @@ router.get('/books', asyncHandler(async (req, res) => {
   //   res.render("books/new", { book: {}, title: "New Book" });
   // }
 
-  //not sure if I should use "edit"
+
   //Updates book info in database | Step one: Find book 
 router.get("/:id/edit", asyncHandler(async(req, res) => {
-  const book = await Book.findByPK(req.params.id);
-  res.render("books/edit", { book, title: "Edit Book" })
+  //const book = await Book.findByPK(req.params.id);
+  console.log(req.params.id);
+
+  res.render("update-book.pug", { book, title: "Edit Book" })
 }));
+
 
 //Update Book | Step two: Post method route will request articles ID to update entry
 router.post('/:id/edit', asyncHandler(async (req, res) => {

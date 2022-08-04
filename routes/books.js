@@ -5,15 +5,20 @@ const res = require('express/lib/response');
  const newBooks = require('../models').newBooks;
  const pug = require ('pug');
 
- console.log(pug.renderFile('new-book.pug'));
+ //console.log(pug.renderFile('new-book.pug'));
  console.log(newBooks);
  
  // New entry | Posts a new book to database
- const book2 = await Book.create({
-    title: 'Becoming'
+ function createBook (title, author, genre, year) {
+ const book2 =  Book.create({
+    title: title,
+    author: author,
+    genre: genre,
+    year: year
   });  
-  console.log(book2.toJSON());
-
+  //console.log(book2.toJSON());
+  return book2;
+};
 
   
-  module.exports = router;
+  module.exports = createBook;
