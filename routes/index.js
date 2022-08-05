@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
     res.redirect("/books");
 // New entry | Posts a new book to database
 createNewBook(
-  "Dune", "Frank Herbert", "Fiction", "2007"
+  //"Dune", "Frank Herbert", "Fiction", "2007"
 );
  
     console.log('Handling request to home page, "/"');
@@ -36,6 +36,7 @@ createNewBook(
 //Shows full list of books 
 router.get('/books', asyncHandler(async (req, res) => {
     const books = await Book.findAll();
+    res.render("layout", { books: books });
     //throw new Error("It Broke")
     //res.json(books);
     res.render()
@@ -44,10 +45,10 @@ router.get('/books', asyncHandler(async (req, res) => {
   //Shows the create new book form - browser says "NewBook at /books/new is not defined"
   router.get('/books/new', asyncHandler(async (req, res) => {
     const newBooks = createNewBook(
-      "Test", "Test Author", "Fiction", "2008"
+      //"Test", "Test Author", "Fiction", "2008"
     );
-    //res.json(newBooks);
-    res.redirect("/books");
+    res.json(newBooks);
+    //res.redirect("/books");`
   }));
 
  
