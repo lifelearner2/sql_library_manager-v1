@@ -1,12 +1,29 @@
 extends layout.pug
-
+block title
+  if(book.title)
+    title= book.title
+  else
+    title Update Book  
 block content
-  h1= Update Book
-  p Title
-  p Author
-  p Genre 
-  p Year
-  br
-    p(input type="submit" value="Update Book")
-    a(class="button" href="all_books.html") Cancel
-    p(input type="submit" value="Delete Book")
+  h1 Update Book
+  form(action=`/books/${book.id}` method="POST")
+    include form-error.pug
+    p
+      label(for="title") Title
+      input(name="title" type="text" id="title" value=`${book.title}`)
+    p
+      label(for="author") Author
+      input(name="author" type="text" id="author" value=`${book.author}`)
+    p
+      label(for="genre") Genre
+      input(name="genre" type="text" id="genre" value=`${book.genre}`)
+    p
+      label(for="year") Year
+      input(name="year" type="text" id="year" value=`${book.year}`)
+    p
+      input(type="submit" value="Update Book")
+    p
+      a.button(href="/") Cancel
+    p
+  form(action=`/books/${book.id}/delete` method='POST' onsubmit="return confirm('Do you really want to delete this book?');")
+    input.delete(type="submit" value="Delete Book")

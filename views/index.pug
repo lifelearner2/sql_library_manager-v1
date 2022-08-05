@@ -1,6 +1,23 @@
 extends layout.pug
-
+block title
+  title Jeanene's SQL Library Manager
 block content
-  h1= title
-  p Welcome to #{books[0].title}
+  h1 Books
+  p
+    a.button(href="/books/new") Create New Book
+  table
+    thead
+      tr
+        th Title
+        th Author
+        th Genre
+        th Year
+    tbody
+      each book in books
+        tr
+          td
+            a(href=`/books/${book.id}`)= book.title
+          td= book.author
+          td= book.genre
+          td= book.year
 

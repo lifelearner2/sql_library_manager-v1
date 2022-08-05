@@ -1,13 +1,24 @@
 extends layout.pug
-
+block title
+  title New Book
 block content
-  h1= New Book
-    p Title
-    p Author 
-    p Genre 
-    p Year
-  br
-  p(input type="submit" value="Create New Book") 
-    a.btn-link(href=`${book}`) Create New Book
-  a(class="button" href="all_books.html") Cancel
+  h1 New Book
+  form(action="/books/new" method="POST")
+    include form-error.pug
+    p
+      label(for="title") Title
+      input(name="title" type="text" id="title" placeholder="Required")
+    p
+      label(for="author") Author
+      input(name="author" type="text" id="author" placeholder="Required")
+    p
+      label(for="genre") Genre
+      input(name="genre" type="text" id="genre")
+    p
+      label(for="year") Year
+      input(name="year" type="text" id="year")
+    p
+      input(type="submit" value="Create New Book")
+    p
+      a.button(href="/") Cancel
   

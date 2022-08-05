@@ -1,5 +1,9 @@
 extends layout.pug
-
+block title
+  title Server Error
 block content
   h1 Server Error
   p= err.message
+  br
+  p
+    a.button(href="/") Home

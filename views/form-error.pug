@@ -1,14 +1,5 @@
-extends layout.pug
-
-block content
-  h1= New Book
-  h2= error
-    li=Title is required
-    li=Author is required
-  p Title
-  p Author 
-  p Genre 
-  p Year
-  br
-  p(input type="submit" value="Create New Book") 
-  a(class="button" href="all_books.html") Cancel
+if(errors)
+  h2.error Oops an error occurred!
+  ul.error
+    each error in errors
+      li= error.message

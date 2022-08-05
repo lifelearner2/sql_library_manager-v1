@@ -1,4 +1,3 @@
-
 const express = require('express');
 const path = require('path');
 const Sequelize = require('./models/index.js').sequelize;
@@ -31,10 +30,6 @@ app.use('/', indexRouter);
 console.log('hello');
 
 
-app.get("/books/new", (req, res, next) => {
-  res.render("new");
-  console.log('Handling request to "new books" route, "/new"');
-});
 
 //error handling
 app.use((req, res, next) => {
