@@ -17,6 +17,8 @@ function asyncHandler(cb){
     }
   }
 
+
+
 /* GET home page & redirecting to Book page. */
 router.get('/', (req, res) => {
     res.redirect("/books");
@@ -35,7 +37,8 @@ createNewBook(
 router.get('/books', asyncHandler(async (req, res) => {
     const books = await Book.findAll();
     //throw new Error("It Broke")
-    res.json(books);
+    //res.json(books);
+    res.render()
   }));
 
   //Shows the create new book form - browser says "NewBook at /books/new is not defined"

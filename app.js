@@ -28,6 +28,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+console.log('hello');
 
 
 //error handling
