@@ -6,19 +6,20 @@ html
   body
     block content
         h1= Books
-        p button
-        table 
-          tr 
-            th Title
-            th Author
-            th Genre
-            th Year
-          each book in books
-            tr
-              td #{book.title}
-              td #{book.author}
-              td #{book.genre}
-              td #{book.year}
+          p Books
+          a.btn-link(href=`${book}`) Create New Book
+          table 
+            tr 
+              th Title
+              th Author
+              th Genre
+              th Year
+            each book in books
+              tr
+                td #{book.title}
+                td #{book.author}
+                td #{book.genre}
+                td #{book.year}
           
         br
         a(class="button" href="book_detail.html") 
