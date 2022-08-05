@@ -31,6 +31,11 @@ app.use('/', indexRouter);
 console.log('hello');
 
 
+app.get("/books/new", (req, res, next) => {
+  res.render("new");
+  console.log('Handling request to "new books" route, "/new"');
+});
+
 //error handling
 app.use((req, res, next) => {
   const err = new Error('Page Not Found');

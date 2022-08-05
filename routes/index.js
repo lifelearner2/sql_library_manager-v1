@@ -30,7 +30,33 @@ createNewBook(
     console.log('Handling request to home page, "/"');
   });
   
+  router.get("/books/new", (req, res, next) => {
+    res.render("book");
+    console.log('Processing request for "new book" page');
+    const bookId = req.params.id;
+    const book = books.find(({ id }) => id === +bookId);
+      if (book) {
+        res.render("book", { book });
+      } else {
+        next();
+      }
+  })
 
+//Get New Book Page
+router.get("/books/new", (req, res, next) => {
+  res.render("new");
+  console.log('Handling request to "new books" route, "/new"');
+});
+
+//Get Update Book page
+router.get('/books/update', (req, res) => {
+  res.render('/books/update');
+});
+
+//Get error page
+router.get('/books/error', (req, res) => {
+  res.render('/books/error');
+});
 
 
 //Shows full list of books 
@@ -42,15 +68,20 @@ router.get('/books', asyncHandler(async (req, res) => {
     res.render()
   }));
 
-  //Shows the create new book form - browser says "NewBook at /books/new is not defined"
-  router.get('/books/new', asyncHandler(async (req, res) => {
-    const newBooks = createNewBook(
-      //"Test", "Test Author", "Fiction", "2008"
-    );
-    res.json(newBooks);
-    //res.redirect("/books");`
-  }));
+  //Shows the create new book form - Need to fix route for the create new book button that is on the layout.pug
 
+  // router.get('/books/new', asyncHandler(async (req, res) => {
+  //   const newBooks = createNewBook(
+  //     //"Test", "Test Author", "Fiction", "2008"
+  //   );
+  //   res.json(newBooks);
+  //   //res.redirect("/books");`
+  // }));
+
+  // router.get('/books/new', asyncHandler(async (req, res) => {
+  //   const createNewBook = createNewBook()
+  //     res.render("new-book", { books: newBooks });
+  // }));
  
   //Shows book detail form
   // router.get('/new', (req, res) => {
